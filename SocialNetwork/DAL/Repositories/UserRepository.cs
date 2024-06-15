@@ -35,11 +35,13 @@ namespace SocialNetwork.DAL.Repositories
             return QueryFirstOrDefault<UserEntity>(@"select * from users where id = :id_p", new { id_p = id });
         }
 
+        
         public int Update(UserEntity userEntity)
         {
-           return Execute(@"update users set firstname = :firstname, lastname = :lastname, password = :password, email = :email,
-                             photo = :photo, favorite_movie = :favorite_movie, favorite_book = :favorite_book where id = :id", userEntity);
+            return Execute(@"update users set firstname = :firstname, lastname = :lastname, password = :password, email = :email,
+                     photo = :photo, favorite_movie = :favorite_movie, favorite_Book = :favoriteBook where id = :Id", userEntity);
         }
+
     }
     public interface IUserRepository
     {

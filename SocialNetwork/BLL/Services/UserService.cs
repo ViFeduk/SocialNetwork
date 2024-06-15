@@ -1,4 +1,5 @@
-﻿using SocialNetwork.BLL.Models;
+﻿using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Models;
 using SocialNetwork.DAL.Entities;
 using SocialNetwork.DAL.Repositories;
 using System;
@@ -49,10 +50,56 @@ namespace SocialNetwork.BLL.Services
             };
 
             if (_userRepository.Create(user) == 0)
-                throw new Exception("Ошибка");
-            
-
-               
+                throw new Exception("Ошибка");   
         }
+        public User FindByEmail(string email)
+        {
+            var findUserEmail = _userRepository.FindByEmail(email);
+            if (findUserEmail is null) throw new UserNotFoundException();
+            return ConstructUserModel(findUserEmail);
+        }
+
+
+        public User ConstructUserModel(UserEntity userEntity)
+        {
+            return new User
+                (userEntity.Id,
+                userEntity.firstname,
+                userEntity.lastname,
+                userEntity.password,
+                userEntity.email,
+                userEntity.photo,
+                userEntity.favorite_movie,
+                userEntity.favoriteBook
+                );
+        }
+        public User Authenticate(UserAuthenticationData userAuthenticationData)
+        {
+            var findUserEntity = _userRepository.FindByEmail(userAuthenticationData.Email);
+            if (findUserEntity is null) throw new UserNotFoundException();
+
+            if (findUserEntity.password != userAuthenticationData.Password)
+                throw new WrongPasswordException();
+
+            return ConstructUserModel(findUserEntity);
+        }
+        public void Update(User user)
+        {
+            var updatableUserEntity = new UserEntity()
+            {
+                Id = user.Id,
+                firstname = user.firstname,
+                lastname = user.lastname,
+                password = user.password,
+                email = user.email,
+                photo = user.photo,
+                favorite_movie = user.favorite_movie,
+                favoriteBook = user.favoriteBook
+            };
+
+            if (_userRepository.Update(updatableUserEntity) == 0)
+                throw new Exception();
+        }
+
     }
 }
