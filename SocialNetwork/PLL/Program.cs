@@ -21,6 +21,8 @@ namespace SocialNetwork.PLL
         public static MessageSendingView messageSendingView;
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
+        public static AddFriendView addFriendView;
+        public static PrintAllFriendsView printAllFriendsView;
 
         static void Main(string[] args)
         {
@@ -36,6 +38,8 @@ namespace SocialNetwork.PLL
             messageSendingView = new MessageSendingView(messageService, userService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
+            addFriendView = new AddFriendView();
+            printAllFriendsView = new PrintAllFriendsView();
 
             while (true)
             {

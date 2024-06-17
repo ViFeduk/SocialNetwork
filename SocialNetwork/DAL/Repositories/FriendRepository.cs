@@ -16,12 +16,12 @@ namespace SocialNetwork.DAL.Repositories
 
         public int Delete(int id)
         {
-            return Execute(@"delete from friends where id = :id_del", new { id_del = id });
+            return Execute(@"delete from friends where user_id = :id_del", new { id_del = id });
         }
 
         public IEnumerable<FriendEntity> FindAllByUserId(int userId)
         {
-           return Query<FriendEntity>(@"select * from friend where id = id_us", new {id_us =  userId});
+           return Query<FriendEntity>(@"select * from friends where user_id = :id_us", new {id_us =  userId});
         }
     }
     public interface IFriendRepository
