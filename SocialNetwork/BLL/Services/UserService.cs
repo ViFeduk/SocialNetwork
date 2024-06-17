@@ -119,6 +119,7 @@ namespace SocialNetwork.BLL.Services
             if (_userRepository.Update(updatableUserEntity) == 0)
                 throw new Exception();
         }
+       
 
     }
 }

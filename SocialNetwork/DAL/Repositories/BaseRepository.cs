@@ -36,6 +36,7 @@ namespace SocialNetwork.DAL.Repositories
             using (var connection = CreateConnection())
             {
                 connection.Open();
+
                 return connection.Execute(sql, parameters);
             }
         }

@@ -34,6 +34,10 @@ namespace SocialNetwork.PLL.Views
             {
                AlertMessage.Show("Пользователь не найден");
             }
+            catch (RecordExistsException)
+            {
+                AlertMessage.Show("Пользователь уже ваш друг!");
+            }
             catch 
             {
                AlertMessage.Show("Непредвиденная ошибка");

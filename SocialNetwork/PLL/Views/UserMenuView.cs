@@ -20,7 +20,8 @@ namespace SocialNetwork.PLL.Views
         {
             while (true)
             {
-                Console.WriteLine($"\n\n\n\n");
+              
+                Console.WriteLine($"\n\n");
                 Console.WriteLine("Входящие сообщения: {0}", user.IncomingMessages.Count());
                 Console.WriteLine("Исходящие сообщения: {0}", user.OutgoingMessages.Count());
 

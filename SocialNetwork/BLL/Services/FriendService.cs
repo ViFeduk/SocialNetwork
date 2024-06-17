@@ -23,15 +23,24 @@ namespace SocialNetwork.BLL.Services
 
         public void AddNewFriends(FriendCreateData friendCreate)
         {
-            var friendUser = _userRepository.FindByEmail(friendCreate.EmailFriend) ?? throw new UserNotFoundException();
+            var findFriend = _userRepository.FindByEmail(friendCreate.EmailFriend) ?? throw new UserNotFoundException();
 
             var friendEntity = new FriendEntity
             {
-                friend_id = friendUser.Id,
+                friend_id = findFriend.Id,
                 user_id = friendCreate.UserId
             };
+            var doubleRecord = new FriendEntity
+            {
+                friend_id = friendCreate.UserId,
+                user_id = findFriend.Id
+            };
+            if (_friendRepository.FindRecord(friendCreate.UserId, findFriend.Id) != null) 
+                throw new RecordExistsException();
 
             if (_friendRepository.Create(friendEntity) == 0)
+                throw new Exception();
+            if (_friendRepository.Create(doubleRecord) == 0)
                 throw new Exception();
         }
         public IEnumerable<Friend> GetAllFriends(int UserId)
