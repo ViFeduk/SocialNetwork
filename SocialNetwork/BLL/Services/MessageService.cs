@@ -52,7 +52,7 @@ namespace SocialNetwork.BLL.Services
 
         public void SendMessage(MessageSendingData messageSendingData)
         {
-            if (String.IsNullOrEmpty(messageSendingData.Content))
+            if(String.IsNullOrEmpty(messageSendingData.Content))
                 throw new ArgumentNullException();
 
             if (messageSendingData.Content.Length > 5000)

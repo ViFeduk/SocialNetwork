@@ -2,20 +2,15 @@
 using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
 using SocialNetwork.PLL.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.PLL.Views
 {
     public class AuthenticationView
     {
-        UserService userService;
+        UserService userServicec;
         public AuthenticationView(UserService userService)
         {
-            this.userService = userService;
+            userServicec = userService;
         }
 
         public void Show()
@@ -30,7 +25,7 @@ namespace SocialNetwork.PLL.Views
 
             try
             {
-                var user = this.userService.Authenticate(authenticationData);
+                var user = userServicec.Authenticate(authenticationData);
 
                 SuccessMessage.Show("Вы успешно вошли в социальную сеть!");
                 SuccessMessage.Show("Добро пожаловать " + user.firstname);

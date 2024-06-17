@@ -22,12 +22,12 @@ namespace SocialNetwork.DAL.Repositories
 
         public IEnumerable<MessageEntity> FindByRecipientId(int recipientId)
         {
-            return Query<MessageEntity>(@"select * from message where id = :id_rec", new { id_rec = recipientId });
+            return Query<MessageEntity>(@"select * from message where recipient_id = :id_rec", new { id_rec = recipientId });
         }
 
         public IEnumerable<MessageEntity> FindBySenderId(int senderId)
         {
-            return Query<MessageEntity>(@"select * from message where id = :id_m", new { id_m = senderId});
+            return Query<MessageEntity>(@"select * from message where sender_id = :id_m", new { id_m = senderId});
         }
     }
 
